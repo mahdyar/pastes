@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "MonoLisa";
+  src: url("/fonts/MonoLisa-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MonoLisa";
+  src: url("/fonts/MonoLisa-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MonoLisa";
+  src: url("/fonts/MonoLisa-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MonoLisa";
+  src: url("/fonts/MonoLisa-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MonoLisa";
+  src: url("/fonts/MonoLisa-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@theme {
+  --font-display: "MonoLisa", "sans-serif";
+  --color-main-background: #D9D9D9;
+}
+
