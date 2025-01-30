@@ -6,7 +6,7 @@ import Layout from "./layout.tsx";
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Routes>
-    <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<App />} />
         <Route path=":id" element={<>Hiii</>} />
       </Route>
