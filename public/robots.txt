@@ -1,4 +1,0 @@
-user-agent: *
-Allow: /$
-Allow: /heybin.webp
-Disallow: /
