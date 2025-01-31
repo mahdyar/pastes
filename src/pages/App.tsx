@@ -49,7 +49,7 @@ function App() {
           <div className="flex items-center">
             <label
               htmlFor="custom-url"
-              className="text-xl block font-bold mt-1"
+              className="text-xl block font-black mt-1"
             >
               <span className="text-blue-500 text-2xl">P</span>astes.ir/
             </label>
