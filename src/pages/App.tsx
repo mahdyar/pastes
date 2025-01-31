@@ -46,7 +46,7 @@ function App() {
           <textarea
             name="text"
             id="textarea"
-            className="w-full p-2 h-full focus:outline-1 focus:outline-black-30 rounded-lg"
+            className="w-full p-4 h-full focus:outline-1 focus:outline-black-30 rounded-lg"
             placeholder="Write whatever you want..."
           ></textarea>
         </div>
