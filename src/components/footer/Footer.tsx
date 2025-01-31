@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-white h-[10vh] mt-3 rounded-lg">
+    <footer className="bg-white h-[8%] sm:h-[10%] rounded-lg mb-4 mt-3">
       <div>
         <button className="cursor-pointer">
           <img src="/mail.png" alt="mail" />

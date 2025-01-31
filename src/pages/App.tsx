@@ -2,13 +2,14 @@ import { Link } from "react-router";
 
 function App() {
   return (
-    <div className="flex flex-col gap-3">
-      <header className="w-full mx-auto rounded-lg h-[10vh] flex items-center md:bg-white justify-between p-2">
+    <div className="flex flex-col gap-3 h-[92%] mt-4">
+      <header className="w-full mx-auto rounded-lg h-[10%] md:h-[10%] flex items-center md:bg-white justify-between p-4">
         <div>
           <Link to={"/"} className="flex gap-1 items-center">
             <img src="/pastes.png" alt="" className="w-10" />
             <h1 className="font-black text-2xl sm:text-3xl">
-              <span className="text-blue-500 text-3xl sm:text-4xl">P</span>astes.ir
+              <span className="text-blue-500 text-3xl sm:text-4xl">P</span>
+              astes.ir
             </h1>
           </Link>
         </div>
@@ -19,8 +20,8 @@ function App() {
           </button>
         </div>
       </header>
-      <main className="flex flex-col gap-3">
-        <div className="h-[50vh] sm:h-[60vh] bg-white w-full rounded-lg">
+      <main className="flex flex-col gap-3 h-[90%] md:h-[90%]">
+        <div className="h-[70%] sm:h-[88%] md:h-[100%] bg-white w-full rounded-lg">
           <textarea
             name="text"
             id="textarea"
@@ -30,7 +31,7 @@ function App() {
             cols={33}
           ></textarea>
         </div>
-        <div className="h-[20vh] sm:h-[10vh] bg-white w-full rounded-lg"></div>
+        <div className="h-[30%] sm:h-[12%] bg-white w-full rounded-lg md:hidden"></div>
       </main>
     </div>
   );
