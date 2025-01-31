@@ -29,7 +29,7 @@ function App() {
             </div>
             <div className="flex items-center">
               <input
-                type="text"
+                type="password"
                 name="custom-url"
                 className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-48 lg:w-54 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 placeholder="Password(Opt.)"
@@ -67,7 +67,7 @@ function App() {
           </div>
           <div className="flex items-center">
             <input
-              type="text"
+              type="password"
               name="custom-url"
               className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
               placeholder="Password(Opt.)"
