@@ -1,24 +1,40 @@
-import { Link } from "react-router";
+import Logo from "../components/logo/Logo";
+import SubmitBtn from "../components/submit/Submit";
 
 function App() {
   return (
     <div className="flex flex-col gap-3 h-[92%] mt-4">
       <header className="w-full mx-auto rounded-lg h-[10%] md:h-[10%] flex items-center md:bg-white justify-between p-4">
-        <div>
-          <Link to={"/"} className="flex gap-1 items-center">
-            <img src="/pastes.png" alt="" className="w-10" />
-            <h1 className="font-black text-2xl sm:text-3xl">
-              <span className="text-blue-500 text-3xl sm:text-4xl">P</span>
-              astes.ir
-            </h1>
-          </Link>
+        <div className="flex items-center">
+          <Logo />
+          <div className="hidden md:flex md:gap-3 lg:gap-5">
+            <div className="flex items-center">
+              <label
+                htmlFor="custom-url"
+                className="text-3xl block font-bold mt-1"
+              >
+                /
+              </label>
+              <input
+                type="text"
+                name="custom-url"
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-44 py-1.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                placeholder="panda(Opt.)"
+              />
+            </div>
+            <div className="flex items-center">
+              <input
+                type="text"
+                name="custom-url"
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-52 py-1.5 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                placeholder="Password(Opt.)"
+              />
+            </div>
+            <SubmitBtn className="hidden md:block" />
+          </div>
         </div>
-        <div>
-          <button className="border-2 border-blue-600 text-blue-600 rounded-md px-2 py-1.5 cursor-pointer duration-200 hover:bg-blue-500 hover:text-white">
-            <i className="fa-light fa-floppy-disk text-lg"></i>{" "}
-            <span className="tracking-[2.5px] text-lg font-bold">SAVE</span>
-          </button>
-        </div>
+
+        <SubmitBtn className="md:hidden" />
       </header>
       <main className="flex flex-col gap-3 h-[90%] md:h-[90%]">
         <div className="h-[70%] sm:h-[88%] md:h-[100%] bg-white w-full rounded-lg">
