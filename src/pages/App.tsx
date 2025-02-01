@@ -23,7 +23,7 @@ function App() {
                 name="custom-url"
                 minLength={3}
                 maxLength={16}
-                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-44 lg:w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 placeholder="panda(Opt.)"
               />
             </div>
@@ -31,7 +31,7 @@ function App() {
               <input
                 type="password"
                 name="custom-url"
-                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-48 lg:w-54 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 placeholder="Password(Opt.)"
               />
             </div>
@@ -61,7 +61,7 @@ function App() {
             <input
               type="text"
               name="custom-url"
-              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
               placeholder="panda(Opt.)"
             />
           </div>
@@ -69,7 +69,7 @@ function App() {
             <input
               type="password"
               name="custom-url"
-              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
               placeholder="Password(Opt.)"
             />
           </div>
