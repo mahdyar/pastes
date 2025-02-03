@@ -3,8 +3,8 @@
 import axios from "axios";
 type createPasteTypes = (
   paste: string,
-  slang: string | null,
-  password: string | null
+  slang: string,
+  password: string
 ) => Promise<{
   status: number;
   data: { status: number; slang: string };

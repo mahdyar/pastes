@@ -4,31 +4,35 @@ import SubmitBtn from "../components/submit/Submit";
 import { createPaste } from "../actions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 function App() {
-  const [paste, setPaste] = useState<string | null>(null);
-  const [slang, setSlang] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [paste, setPaste] = useState<string | null>("");
+  const [slang, setSlang] = useState<string | null>("");
+  const [password, setPassword] = useState<string | null>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const formOnSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const createPastePromise = createPaste(paste!, slang, password);
 
-    toast.promise(createPastePromise, {
-      loading: "Creating paste...",
-      success: "Paste created successfully!",
-      error: "Error creating paste",
-    });
-
+    console.log(paste, slang, password);
+    const trimPaste = paste?.trim();
+    const trimSlang = slang?.trim();
+    const trimPassword = password?.trim();
     try {
-      const { status, data } = await createPastePromise;
+      const { status, data } = await createPaste(
+        trimPaste!,
+        trimSlang!,
+        trimPassword!
+      );
+
       if (status === 200) {
-        setPaste("");
-        setSlang("");
-        setPassword("");
+        toast.success("Paste created successfully");
+        setPaste(null);
+        setSlang(null);
+        setPassword(null);
         setTimeout(() => {
           navigate(`/${data.slang}`);
         }, 1000);
@@ -36,7 +40,15 @@ function App() {
         toast.error("Error creating paste");
       }
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        console.log(error);
+
+        if (error.response?.status === 400) {
+          toast.error(`"${slang}" is already taken.`);
+        } else {
+          toast.error(`Error: ${error.response?.statusText}`);
+        }
+      }
     }
     setLoading(false);
   };
@@ -110,6 +122,7 @@ function App() {
             disabled={loading}
             className="w-full p-4 h-full disabled:opacity-70 disabled:bg-gray-300 focus:outline-1 focus:outline-black-30 rounded-lg"
             placeholder="Write whatever you want..."
+            dir="auto"
           ></textarea>
         </div>
         <div className="h-[30%] sm:h-[15%] bg-white w-full rounded-lg md:hidden shadow-md">
