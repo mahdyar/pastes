@@ -2,6 +2,7 @@
 
 import { Outlet } from "react-router";
 import Footer from "./components/footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout() {
   return (
@@ -14,6 +15,7 @@ export default function Layout() {
         <Outlet />
         <Footer />
       </div>
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
     </div>
   );
 }

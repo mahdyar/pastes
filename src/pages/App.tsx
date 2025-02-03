@@ -1,7 +1,46 @@
+import { FormEvent, useState } from "react";
 import Logo from "../components/logo/Logo";
 import SubmitBtn from "../components/submit/Submit";
+import { createPaste } from "../actions";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 function App() {
+  const [paste, setPaste] = useState<string | null>(null);
+  const [slang, setSlang] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const formOnSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const createPastePromise = createPaste(paste!, slang, password);
+
+    toast.promise(createPastePromise, {
+      loading: "Creating paste...",
+      success: "Paste created successfully!",
+      error: "Error creating paste",
+    });
+
+    try {
+      const { status, data } = await createPastePromise;
+      if (status === 200) {
+        setPaste("");
+        setSlang("");
+        setPassword("");
+        setTimeout(() => {
+          navigate(`/${data.slang}`);
+        }, 1000);
+      } else {
+        toast.error("Error creating paste");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
       <header className="w-full mx-auto rounded-lg h-[10%] flex items-center md:bg-white justify-between px-4 md:shadow-md">
@@ -9,7 +48,7 @@ function App() {
           <Logo />
           <form
             className="hidden md:flex md:gap-3 lg:gap-5"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={formOnSubmitHandler}
           >
             <div className="flex items-center">
               <label
@@ -20,60 +59,98 @@ function App() {
               </label>
               <input
                 type="text"
-                name="custom-url"
-                minLength={3}
-                maxLength={16}
-                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                name="slang"
+                minLength={4}
+                maxLength={64}
+                value={slang ?? ""}
+                disabled={loading}
+                onChange={(e) => setSlang(e.target.value)}
+                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 placeholder="panda(Opt.)"
               />
             </div>
             <div className="flex items-center">
               <input
                 type="password"
-                name="custom-url"
-                className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                name="password"
+                minLength={3}
+                maxLength={64}
+                value={password ?? ""}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 placeholder="Password(Opt.)"
               />
             </div>
-            <SubmitBtn type="submit" className="hidden md:block" />
+            <SubmitBtn
+              type="submit"
+              className="hidden md:block"
+              disabled={
+                loading || (paste ? (paste.length >= 3 ? false : true) : true)
+              }
+            />
           </form>
         </div>
 
-        <SubmitBtn className="md:hidden" />
+        <SubmitBtn
+          className="md:hidden"
+          form="mobile-form"
+          disabled={loading || (paste ? false : true)}
+        />
       </header>
       <main className="flex flex-col gap-3 h-[86.5%]">
         <div className="h-[70%] sm:h-[90%] md:h-[100%] bg-white w-full rounded-lg shadow-md">
           <textarea
             name="text"
             id="textarea"
-            className="w-full p-4 h-full focus:outline-1 focus:outline-black-30 rounded-lg"
+            onChange={(e) => setPaste(e.target.value)}
+            value={paste ?? ""}
+            minLength={3}
+            maxLength={65536}
+            disabled={loading}
+            className="w-full p-4 h-full disabled:opacity-70 disabled:bg-gray-300 focus:outline-1 focus:outline-black-30 rounded-lg"
             placeholder="Write whatever you want..."
           ></textarea>
         </div>
-        <div className="flex gap-3 flex-col items-center justify-center sm:flex-row h-[30%] sm:h-[15%] bg-white w-full rounded-lg md:hidden shadow-md">
-          <div className="flex items-center">
-            <label
-              htmlFor="custom-url"
-              className="text-xl block font-black mt-1"
-            >
-              <span className="text-blue-500 text-2xl">P</span>astes.ir/
-            </label>
-            <input
-              type="text"
-              name="custom-url"
-              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-              placeholder="panda(Opt.)"
-            />
-          </div>
-          <div className="flex items-center">
-            <input
-              type="password"
-              name="custom-url"
-              className="bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-              placeholder="Password(Opt.)"
-            />
-          </div>
-          <SubmitBtn className="hidden md:block" />
+        <div className="h-[30%] sm:h-[15%] bg-white w-full rounded-lg md:hidden shadow-md">
+          <form
+            id="mobile-form"
+            className="flex gap-3 flex-col items-center justify-center sm:flex-row h-full"
+            onSubmit={formOnSubmitHandler}
+          >
+            <div className="flex items-center">
+              <label
+                htmlFor="custom-url"
+                className="text-xl block font-black mt-1"
+              >
+                <span className="text-blue-500 text-2xl">P</span>astes.ir/
+              </label>
+              <input
+                type="text"
+                name="slang"
+                minLength={4}
+                maxLength={64}
+                value={slang ?? ""}
+                disabled={loading}
+                onChange={(e) => setSlang(e.target.value)}
+                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                placeholder="panda(Opt.)"
+              />
+            </div>
+            <div className="flex items-center">
+              <input
+                type="password"
+                name="password"
+                minLength={3}
+                maxLength={64}
+                value={password ?? ""}
+                disabled={loading}
+                onChange={(e) => setPassword(e.target.value)}
+                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                placeholder="Password(Opt.)"
+              />
+            </div>
+          </form>
         </div>
       </main>
     </div>
