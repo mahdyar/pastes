@@ -19,3 +19,11 @@ export const createPaste: createPasteTypes = async (paste, slang, password) => {
     data: response.data,
   };
 };
+
+export const getSlang = async (slang: string) => {
+  const API_URL = import.meta.env.VITE_API_URL as string;
+  const fullURL = `${API_URL}/${slang}`;
+  const response = await axios.get(fullURL);
+  const data = response.data;
+  return data;
+};
