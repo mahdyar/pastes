@@ -75,7 +75,7 @@ const SlangPage = () => {
                 password={password}
               />
             )}
-            <div className="h-[70%] sm:h-[90%] md:h-[100%] bg-white w-full rounded-lg shadow-md">
+            <div className="h-[100%] bg-white w-full rounded-lg shadow-md">
               <textarea
                 name="text"
                 id="textarea"
