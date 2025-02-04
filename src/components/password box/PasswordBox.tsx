@@ -26,7 +26,7 @@ const PasswordBox = ({
         </strong>
         <div>
           <input
-            type="text"
+            type="password"
             name="slang"
             minLength={4}
             maxLength={64}
