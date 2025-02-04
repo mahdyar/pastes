@@ -89,7 +89,7 @@ const SlangPage = () => {
                 minLength={3}
                 maxLength={65536}
                 disabled
-                className="w-full p-4 h-full disabled:bg-gray-200 focus:outline-1 focus:outline-black-30 rounded-lg"
+                className="w-full p-4 h-full disabled:bg-gray-50 focus:outline-1 focus:outline-black-30 rounded-lg"
               ></textarea>
             </div>
           </>
