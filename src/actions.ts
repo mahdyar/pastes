@@ -1,5 +1,3 @@
-"use server";
-
 import axios from "axios";
 type createPasteTypes = (
   paste: string,
@@ -20,10 +18,10 @@ export const createPaste: createPasteTypes = async (paste, slang, password) => {
   };
 };
 
-export const getSlang = async (slang: string) => {
+export const getSlang = async (slang: string, password?: string) => {
   const API_URL = import.meta.env.VITE_API_URL as string;
-  const fullURL = `${API_URL}/${slang}`;
+  const fullURL = `${API_URL}/${slang}${password && `/${password}`}`;
   const response = await axios.get(fullURL);
-  const data = response.data;
-  return data;
+
+  return { status: response.status, data: response.data };
 };
