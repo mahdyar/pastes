@@ -27,8 +27,10 @@ const SlangPage = () => {
   }, [slang]);
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
-      <header className="w-full mx-auto rounded-lg h-[10%] flex items-center md:bg-white justify-between px-4 md:shadow-md">
+      <header className="w-full mx-auto rounded-lg h-[10%] flex items-center md:bg-white px-4 md:shadow-md">
         <Logo />
+        <span className="pt-3 text-xl text-black font-bold">/</span>
+        <span className="pt-3 font-bold text-lg text-gray-700">{slang}</span>
       </header>
       <main className="flex relative flex-col gap-3 h-[86.5%]">
         {isProtected && (
