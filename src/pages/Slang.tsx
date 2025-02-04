@@ -82,7 +82,7 @@ const SlangPage = () => {
                 readOnly
                 value={
                   paste.length === 0
-                    ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\nLorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                    ? "01000100 01101111 01101110 00100111 01110100 00100000 01110100 01101000 01101001 01101110 01101011 00100000 01111001 01101111 01110101 00100111 01110010 01100101 00100000 01110011 01101111 00100000 01110011 01101101 01100001 01110010 01110100 00100001 00100000 01010111 01100101 00100000 01110100 01101000 01101111 01110101 01100111 01101000 01110100 00100000 01101111 01100110 00100000 01110100 01101000 01100001 01110100 00101110 00101110 00101110"
                     : paste
                 }
                 unselectable="on"
