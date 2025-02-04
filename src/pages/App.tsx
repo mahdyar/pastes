@@ -1,23 +1,48 @@
-import { FormEvent, useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../components/logo/Logo";
 import SubmitBtn from "../components/submit/Submit";
 import { createPaste } from "../actions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+  paste: string;
+  slang: string;
+  password: string;
+}
 
 function App() {
-  const [paste, setPaste] = useState<string | null>("");
-  const [slang, setSlang] = useState<string | null>("");
-  const [password, setPassword] = useState<string | null>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const formOnSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const pasteValue = watch("paste");
+
+  useEffect(() => {
+    if (errors.slang) {
+      toast.error(errors.slang.message);
+    }
+    if (errors.password) {
+      toast.error(errors.password.message);
+    }
+    if (errors.paste) {
+      toast.error(errors.paste.message);
+    }
+  }, [errors]);
+
+  const formOnSubmitHandler = async (data: FormData) => {
     setLoading(true);
 
-    console.log(paste, slang, password);
+    const { paste, slang, password } = data;
     const trimPaste = paste?.trim();
     const trimSlang = slang?.trim();
     const trimPassword = password?.trim();
@@ -30,9 +55,9 @@ function App() {
 
       if (status === 200) {
         toast.success("Paste created successfully");
-        setPaste(null);
-        setSlang(null);
-        setPassword(null);
+        setValue("paste", "");
+        setValue("slang", "");
+        setValue("password", "");
         setTimeout(() => {
           navigate(`/${data.slang}`);
         }, 1000);
@@ -60,7 +85,7 @@ function App() {
           <Logo />
           <form
             className="hidden md:flex md:gap-3 lg:gap-5"
-            onSubmit={formOnSubmitHandler}
+            onSubmit={handleSubmit(formOnSubmitHandler)}
           >
             <div className="flex items-center">
               <label
@@ -71,35 +96,47 @@ function App() {
               </label>
               <input
                 type="text"
-                name="slang"
-                minLength={4}
-                maxLength={64}
-                value={slang ?? ""}
+                {...register("slang", {
+                  minLength: {
+                    value: 4,
+                    message: "Slang must be at least 4 characters long",
+                  },
+                  maxLength: {
+                    value: 64,
+                    message: "Slang must be at most 64 characters long",
+                  },
+                })}
                 disabled={loading}
-                onChange={(e) => setSlang(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className={`${
+                  errors.slang ? "border-red-500" : "border-gray-200"
+                } invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500`}
                 placeholder="panda(Opt.)"
               />
             </div>
             <div className="flex items-center">
               <input
                 type="password"
-                name="password"
-                minLength={3}
-                maxLength={64}
-                value={password ?? ""}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", {
+                  minLength: {
+                    value: 3,
+                    message: "Password must be at least 3 characters long",
+                  },
+                  maxLength: {
+                    value: 64,
+                    message: "Password must be at most 64 characters long",
+                  },
+                })}
                 disabled={loading}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className={`${
+                  errors.password ? "border-red-500" : "border-gray-200"
+                } invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500`}
                 placeholder="Password(Opt.)"
               />
             </div>
             <SubmitBtn
               type="submit"
               className="hidden md:block"
-              disabled={
-                loading || (paste ? (paste.length >= 3 ? false : true) : true)
-              }
+              disabled={loading || !pasteValue || pasteValue.length < 3}
             />
           </form>
         </div>
@@ -107,20 +144,26 @@ function App() {
         <SubmitBtn
           className="md:hidden"
           form="mobile-form"
-          disabled={loading || (paste ? false : true)}
+          disabled={loading || !pasteValue || pasteValue.length < 3}
         />
       </header>
       <main className="flex flex-col gap-3 h-[86.5%]">
         <div className="h-[70%] sm:h-[90%] md:h-[100%] bg-white w-full rounded-lg shadow-md">
           <textarea
-            name="text"
-            id="textarea"
-            onChange={(e) => setPaste(e.target.value)}
-            value={paste ?? ""}
-            minLength={3}
-            maxLength={65536}
+            {...register("paste", {
+              minLength: {
+                value: 3,
+                message: "Paste must be at least 3 characters long",
+              },
+              maxLength: {
+                value: 65536,
+                message: "Paste must be at most 65536 characters long",
+              },
+            })}
             disabled={loading}
-            className="w-full p-4 h-full disabled:opacity-70 disabled:bg-gray-300 focus:outline-1 focus:outline-black-30 rounded-lg"
+            className={`${
+              errors.paste ? "border-red-500" : "border-gray-200"
+            } w-full p-4 h-full disabled:opacity-70 disabled:bg-gray-300 focus:outline-1 focus:outline-black-30 rounded-lg`}
             placeholder="Write whatever you want..."
             dir="auto"
           ></textarea>
@@ -129,7 +172,7 @@ function App() {
           <form
             id="mobile-form"
             className="flex gap-3 flex-col items-center justify-center sm:flex-row h-full"
-            onSubmit={formOnSubmitHandler}
+            onSubmit={handleSubmit(formOnSubmitHandler)}
           >
             <div className="flex items-center">
               <label
@@ -140,26 +183,40 @@ function App() {
               </label>
               <input
                 type="text"
-                name="slang"
-                minLength={4}
-                maxLength={64}
-                value={slang ?? ""}
+                {...register("slang", {
+                  minLength: {
+                    value: 4,
+                    message: "Slang must be at least 4 characters long",
+                  },
+                  maxLength: {
+                    value: 64,
+                    message: "Slang must be at most 64 characters long",
+                  },
+                })}
                 disabled={loading}
-                onChange={(e) => setSlang(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className={`${
+                  errors.slang ? "border-red-500" : "border-gray-200"
+                } invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500`}
                 placeholder="panda(Opt.)"
               />
             </div>
             <div className="flex items-center">
               <input
                 type="password"
-                name="password"
-                minLength={3}
-                maxLength={64}
-                value={password ?? ""}
+                {...register("password", {
+                  minLength: {
+                    value: 3,
+                    message: "Password must be at least 3 characters long",
+                  },
+                  maxLength: {
+                    value: 64,
+                    message: "Password must be at most 64 characters long",
+                  },
+                })}
                 disabled={loading}
-                onChange={(e) => setPassword(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className={`${
+                  errors.password ? "border-red-500" : "border-gray-200"
+                } invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500`}
                 placeholder="Password(Opt.)"
               />
             </div>
