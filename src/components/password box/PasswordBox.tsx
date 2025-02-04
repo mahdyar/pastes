@@ -33,7 +33,7 @@ const PasswordBox = ({
             value={password ?? ""}
             disabled={loading}
             onChange={(e) => setPassword(e.target.value)}
-            className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-md w-full max-w-64 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+            className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-md appearance-none border-2 border-gray-200 rounded-md w-full max-w-64 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
             placeholder="Enter Password"
           />
         </div>
