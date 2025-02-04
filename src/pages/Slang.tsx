@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import Logo from "../components/logo/Logo";
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
 import PasswordBox from "../components/password box/PasswordBox";
 
@@ -10,11 +10,11 @@ const SlangPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isProtected, setIsProtected] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
-  const getData = async () => {
-    try {
-      setLoading(true);
-      const { status, data } = await getSlang(slang as string, password);
 
+  const getData = useCallback(async () => {
+    try {
+      const { status, data } = await getSlang(slang as string, password);
+  
       if (status === 200) {
         setPaste(data.paste);
         setIsProtected(false);
@@ -26,12 +26,13 @@ const SlangPage = () => {
       setLoading(false);
       console.error(error);
     }
-  };
+  }, [slang, password]);
+  
   useLayoutEffect(() => {
     if (slang) {
       getData();
     }
-  }, [slang]);
+  }, [slang,getData]);
 
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
