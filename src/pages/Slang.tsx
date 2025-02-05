@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import Logo from "../components/logo/Logo";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
 import PasswordBox from "../components/password box/PasswordBox";
 import toast from "react-hot-toast";
@@ -30,7 +30,7 @@ const SlangPage = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (slang) {
       getData();
     }
