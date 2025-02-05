@@ -23,5 +23,5 @@ export const getSlang = async (slang: string, password?: string) => {
   const fullURL = `${API_URL}/${slang}${password && `/${password}`}`;
   const response = await axios.get(fullURL);
 
-  return { status: response.status, data: response.data };
+  return { data: response.data };
 };

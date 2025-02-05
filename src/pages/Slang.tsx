@@ -4,6 +4,7 @@ import { useCallback, useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
 import PasswordBox from "../components/password box/PasswordBox";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const SlangPage = () => {
   const { slang } = useParams();
@@ -14,18 +15,18 @@ const SlangPage = () => {
 
   const getData = useCallback(async () => {
     try {
-      const { status, data } = await getSlang(slang as string, password);
+      const { data } = await getSlang(slang as string, password);
 
-      if (status === 200) {
-        setPaste(data.paste);
-        setIsProtected(false);
-      } else if (status === 403) {
-        setIsProtected(true);
-      }
-      setLoading(false);
+      setPaste(data.paste);
+      setIsProtected(false);
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.data) {        
+        toast.error(error.response.data.detail || error.response.data.error);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
+    } finally {
       setLoading(false);
-      console.error(error);
     }
   }, [slang, password]);
 
