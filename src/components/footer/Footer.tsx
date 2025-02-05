@@ -23,7 +23,7 @@ const Footer = () => {
             </span>
           </button>
         </Link>
-        <Link to={"https://telegram.org/"}>
+        <Link to={"https://t.me/pastesrobot"} target="_blank">
           <button className="cursor-pointer flex items-center gap-2 relative group px-2">
             <img
               src="/paper.png"
