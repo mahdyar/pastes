@@ -29,11 +29,14 @@ function App() {
       return false;
     }
 
-    if (trimPassword && (trimPassword.length < 3 || trimPassword.length >= 64)) {
+    if (
+      trimPassword &&
+      (trimPassword.length < 3 || trimPassword.length >= 64)
+    ) {
       toast.error("Password must be between 3 and 64 characters.");
       return false;
     }
-    
+
     try {
       setLoading(true);
       const { status, data } = await createPaste(
@@ -47,9 +50,8 @@ function App() {
         setPaste(null);
         setSlang(null);
         setPassword(null);
-        setTimeout(() => {
-          navigate(`/${data.slang}`);
-        }, 1000);
+
+        navigate(`/${data.slang}`);
       } else {
         toast.error("Error creating paste");
       }
