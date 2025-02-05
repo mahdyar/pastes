@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import Logo from "../components/logo/Logo";
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
 import PasswordBox from "../components/password box/PasswordBox";
 import toast from "react-hot-toast";
@@ -20,7 +20,7 @@ const SlangPage = () => {
       setPaste(data.paste);
       setIsProtected(false);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response && error.response.data) {        
+      if (axios.isAxiosError(error) && error.response && error.response.data) {
         toast.error(error.response.data.detail || error.response.data.error);
       } else {
         toast.error("An unexpected error occurred.");
@@ -30,7 +30,7 @@ const SlangPage = () => {
     }
   }, [slang, password]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (slang) {
       getData();
     }
@@ -65,7 +65,7 @@ const SlangPage = () => {
             >
               <button
                 type="button"
-                className="py-1.5 tracking-widest opacity-90 hover:opacity-100 cursor-pointer duration-200 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                className="py-1 tracking-widest opacity-90 hover:opacity-100 cursor-pointer duration-200 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
               >
                 RAW
               </button>
@@ -101,14 +101,14 @@ const SlangPage = () => {
           </div>
         ) : (
           <>
-            {isProtected && (
-              <PasswordBox
-                getData={getData}
-                setPassword={setPassword}
-                password={password}
-              />
-            )}
             <div className="h-[100%] bg-white w-full rounded-lg shadow-md relative">
+              {isProtected && (
+                <PasswordBox
+                  getData={getData}
+                  setPassword={setPassword}
+                  password={password}
+                />
+              )}
               <textarea
                 name="text"
                 id="textarea"
