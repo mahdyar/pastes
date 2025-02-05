@@ -13,7 +13,7 @@ const SlangPage = () => {
   const [isProtected, setIsProtected] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getData = useCallback(async () => {
+  const getData = async () => {
     try {
       const { data } = await getSlang(slang as string, password);
 
@@ -28,13 +28,13 @@ const SlangPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [slang, password]);
+  };
 
   useEffect(() => {
     if (slang) {
       getData();
     }
-  }, [slang, getData]);
+  }, [slang]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(paste).then(
