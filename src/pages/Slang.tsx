@@ -3,6 +3,7 @@ import Logo from "../components/logo/Logo";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
 import PasswordBox from "../components/password box/PasswordBox";
+import toast from "react-hot-toast";
 
 const SlangPage = () => {
   const { slang } = useParams();
@@ -14,7 +15,7 @@ const SlangPage = () => {
   const getData = useCallback(async () => {
     try {
       const { status, data } = await getSlang(slang as string, password);
-  
+
       if (status === 200) {
         setPaste(data.paste);
         setIsProtected(false);
@@ -27,12 +28,23 @@ const SlangPage = () => {
       console.error(error);
     }
   }, [slang, password]);
-  
+
   useLayoutEffect(() => {
     if (slang) {
       getData();
     }
-  }, [slang,getData]);
+  }, [slang, getData]);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(paste).then(
+      () => {
+        toast.success('Copied to clipboard!');
+      },
+      (err) => {
+        toast.error('Failed to copy: ', err);
+      }
+    );
+  };
 
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
@@ -76,7 +88,7 @@ const SlangPage = () => {
                 password={password}
               />
             )}
-            <div className="h-[100%] bg-white w-full rounded-lg shadow-md">
+            <div className="h-[100%] bg-white w-full rounded-lg shadow-md relative">
               <textarea
                 name="text"
                 id="textarea"
@@ -92,6 +104,16 @@ const SlangPage = () => {
                 disabled
                 className="w-full p-4 h-full disabled:bg-gray-50 focus:outline-1 focus:outline-black-30 rounded-lg"
               ></textarea>
+              {!isProtected && (
+                <div className="absolute right-5 bottom-5" onClick={copyToClipboard}>
+                  <button
+                    type="button"
+                    className="text-white cursor-pointer shadow-md active:scale-95 duration-200 bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:outline-none dark:focus:ring-green-800 font-medium rounded-full text-sm w-10 h-10 text-center"
+                  >
+                    <i className="fa-regular fa-copy text-2xl"></i>
+                  </button>
+                </div>
+              )}
             </div>
           </>
         )}
