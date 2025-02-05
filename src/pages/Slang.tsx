@@ -53,6 +53,21 @@ const SlangPage = () => {
     <>
       <Helmet>
         <title>{slang} | Pastes.ir</title>
+        <meta name="title" content={`${slang} | Pastes.ir`} />
+        <meta
+          name="description"
+          content={`See the ${slang} paste on Pastes.ir`}
+        />
+        <meta
+          property="og:title"
+          name="title"
+          content={`${slang} | Pastes.ir`}
+        />
+        <meta
+          property="og:description"
+          name="description"
+          content={`See the ${slang} paste on Pastes.ir`}
+        />
       </Helmet>
       <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
         <header className="w-full mx-auto rounded-lg h-[10%] flex items-center justify-between md:bg-white px-2 md:shadow-md">
