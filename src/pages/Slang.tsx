@@ -50,13 +50,13 @@ const SlangPage = () => {
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
       <header className="w-full mx-auto rounded-lg h-[10%] flex items-center justify-between md:bg-white px-4 md:shadow-md">
-        <div className="flex items-center">
+        <div className="flex items-center flex-wrap">
           <Logo />
           <span className="pt-3 text-xl text-black font-bold">/</span>
           <span className="pt-3 font-bold text-lg text-gray-700">{slang}</span>
         </div>
         {!isProtected && (
-          <div className="flex items-center">
+          <div className="items-center hidden sm:flex">
             <Link
               to={`${
                 import.meta.env.VITE_API_URL
