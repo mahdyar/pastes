@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import Logo from "../components/logo/Logo";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { getSlang } from "../actions";
@@ -38,20 +38,39 @@ const SlangPage = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(paste).then(
       () => {
-        toast.success('Copied to clipboard!');
+        toast.success("Copied to clipboard!");
       },
       (err) => {
-        toast.error('Failed to copy: ', err);
+        toast.error("Failed to copy: ", err);
       }
     );
   };
 
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
-      <header className="w-full mx-auto rounded-lg h-[10%] flex items-center md:bg-white px-4 md:shadow-md">
-        <Logo />
-        <span className="pt-3 text-xl text-black font-bold">/</span>
-        <span className="pt-3 font-bold text-lg text-gray-700">{slang}</span>
+      <header className="w-full mx-auto rounded-lg h-[10%] flex items-center justify-between md:bg-white px-4 md:shadow-md">
+        <div className="flex items-center">
+          <Logo />
+          <span className="pt-3 text-xl text-black font-bold">/</span>
+          <span className="pt-3 font-bold text-lg text-gray-700">{slang}</span>
+        </div>
+        {!isProtected && (
+          <div className="flex items-center">
+            <Link
+              to={`${
+                import.meta.env.VITE_API_URL
+              }/${slang}/${password}?raw=true`}
+              target="_blank"
+            >
+              <button
+                type="button"
+                className="py-1.5 tracking-widest opacity-90 hover:opacity-100 cursor-pointer duration-200 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              >
+                RAW
+              </button>
+            </Link>
+          </div>
+        )}
       </header>
       <main className="flex relative flex-col gap-3 h-[86.5%]">
         {loading ? (
@@ -105,7 +124,10 @@ const SlangPage = () => {
                 className="w-full p-4 h-full disabled:bg-gray-50 focus:outline-1 focus:outline-black-30 rounded-lg"
               ></textarea>
               {!isProtected && (
-                <div className="absolute right-5 bottom-5" onClick={copyToClipboard}>
+                <div
+                  className="absolute right-5 bottom-5"
+                  onClick={copyToClipboard}
+                >
                   <button
                     type="button"
                     className="text-white cursor-pointer shadow-md active:scale-95 duration-200 bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:outline-none dark:focus:ring-green-800 font-medium rounded-full text-sm w-10 h-10 text-center"
