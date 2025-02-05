@@ -19,7 +19,7 @@ const PasswordBox = ({
   };
   return (
     <div className="absolute w-full h-full flex items-center justify-center backdrop-blur-xs top-0 left-0 px-4">
-      <div className="bg-white w-fit px-4 sm:px-14 py-4 rounded-lg flex items-center justify-center gap-5 flex-col">
+      <div className="bg-white w-fit px-4 sm:px-14 py-4 rounded-lg flex items-center justify-center gap-5 flex-col shadow-md">
         <strong className="flex items-center justify-center text-lg font-bold">
           <img src="/lock.svg" alt="lock" className="w-7 pb-2" />{" "}
           <span className="m-1">Paste is protected!</span>
