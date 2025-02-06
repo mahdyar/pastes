@@ -38,7 +38,7 @@ const SlangPage = () => {
     }
   }, [slang]);
 
-  const copyToClipboard = () => {
+  const pasteCopyToClipboard = () => {
     navigator.clipboard.writeText(paste).then(
       () => {
         toast.success("Copied to clipboard!");
@@ -48,7 +48,17 @@ const SlangPage = () => {
       }
     );
   };
-
+  const copyLinkToClipboard = () => {
+    const domain = import.meta.env.VITE_DOMAIN;
+    navigator.clipboard.writeText(`${domain}/${slang}`).then(
+      () => {
+        toast.success("Copied to clipboard!");
+      },
+      (err) => {
+        toast.error("Failed to copy: ", err);
+      }
+    );
+  };
   return (
     <>
       <Helmet>
@@ -77,6 +87,13 @@ const SlangPage = () => {
             <span className="pt-3 font-bold text-lg text-gray-700 truncate max-w-[120px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[550px] overflow-hidden">
               {slang}
             </span>
+            <button
+              className="flex items-center justify-center rounded-full text-gray-700 text-xl cursor-pointer hover:bg-gray-400/50 h-7 w-7"
+              onClick={copyLinkToClipboard}
+              title="Copy link to clipboard"
+            >
+              <i className="fa-solid fa-copy align-middle"></i>
+            </button>
           </div>
           {!isProtected && (
             <div className="items-center hidden sm:flex">
@@ -127,7 +144,7 @@ const SlangPage = () => {
                 {!isProtected && (
                   <div
                     className="absolute right-5 bottom-5"
-                    onClick={copyToClipboard}
+                    onClick={pasteCopyToClipboard}
                   >
                     <button
                       type="button"
