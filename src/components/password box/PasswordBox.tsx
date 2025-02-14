@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const PasswordBox = ({
   getData,
@@ -10,7 +10,8 @@ const PasswordBox = ({
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const formOnSubmit = async () => {
+  const formOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     getData();
     setTimeout(() => {
