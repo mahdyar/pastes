@@ -33,7 +33,7 @@ const PasswordBox = ({
             <input
               type="password"
               name="slang"
-              minLength={4}
+              minLength={3}
               maxLength={64}
               value={password ?? ""}
               disabled={loading}
