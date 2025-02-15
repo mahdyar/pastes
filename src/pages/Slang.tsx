@@ -96,7 +96,7 @@ const SlangPage = () => {
             </button>
           </div>
           {!isProtected && (
-            <div className="items-center hidden sm:flex">
+            <div className="items-center hidden sm:flex mx-4">
               <Link
                 to={`${
                   import.meta.env.VITE_API_URL
@@ -105,9 +105,9 @@ const SlangPage = () => {
               >
                 <button
                   type="button"
-                  className="m-3 py-1 tracking-widest opacity-90 hover:opacity-100 cursor-pointer duration-200 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  className="border border-gray-700/70 w-24 hover:border-gray-700 text-black/80 hover:text-black text-center flex items-center justify-center rounded-lg py-1 tracking-widest hover:tracking-[5px] cursor-pointer shadow-md hover:shadow-lg duration-200 ease-linear hover:bg-gray-100"
                 >
-                  RAW
+                  <span>RAW</span>
                 </button>
               </Link>
             </div>
