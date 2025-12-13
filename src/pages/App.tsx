@@ -137,6 +137,7 @@ function App() {
             maxLength={65536}
             disabled={loading}
             className="w-full p-4 h-full bg-transparent text-white placeholder-white/50 disabled:opacity-50 focus:outline-none rounded-2xl"
+            style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}
             placeholder="Write whatever you want..."
             dir="auto"
           ></textarea>

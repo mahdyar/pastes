@@ -140,6 +140,7 @@ const SlangPage = () => {
                   dir="auto"
                   disabled
                   className="w-full p-4 h-full bg-transparent text-white placeholder-white/50 focus:outline-none rounded-2xl"
+                  style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)' }}
                 ></textarea>
                 {!isProtected && (
                   <div

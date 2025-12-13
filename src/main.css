@@ -36,7 +36,6 @@
 
 @theme {
   --font-display: "MonoLisa", "Vazirmatn", "sans-serif";
-  --color-main-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 #textarea {
@@ -49,6 +48,22 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .glass-input {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .glass-button {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 
 .glass-card {
