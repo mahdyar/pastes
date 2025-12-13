@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
-      <header className="w-full mx-auto rounded-lg h-[10%] flex items-center md:bg-white justify-between px-4 md:shadow-md">
+      <header className="w-full mx-auto rounded-2xl h-[10%] flex items-center glass-card justify-between px-4 shadow-2xl">
         <div className="flex items-center">
           <Logo />
           <form
@@ -81,7 +81,7 @@ function App() {
             <div className="flex items-center">
               <label
                 htmlFor="custom-url"
-                className="text-3xl block font-bold mt-1"
+                className="text-3xl block font-bold mt-1 text-white/90"
               >
                 /
               </label>
@@ -93,7 +93,7 @@ function App() {
                 value={slang ?? ""}
                 disabled={loading}
                 onChange={(e) => setSlang(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 lg:w-52 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="glass-input disabled:opacity-50 rounded-xl w-44 lg:w-52 py-1 px-2 text-white placeholder-white/60 leading-tight focus:outline-none transition-all duration-300"
                 placeholder="panda(Opt.)"
               />
             </div>
@@ -106,7 +106,7 @@ function App() {
                 value={password ?? ""}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-48 lg:w-54 py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="glass-input disabled:opacity-50 rounded-xl w-48 lg:w-54 py-1 px-2 text-white placeholder-white/60 leading-tight focus:outline-none transition-all duration-300"
                 placeholder="Password(Opt.)"
               />
             </div>
@@ -127,7 +127,7 @@ function App() {
         />
       </header>
       <main className="flex flex-col gap-3 h-[86.5%]">
-        <div className="h-[70%] sm:h-[90%] md:h-[100%] bg-white w-full rounded-lg shadow-md">
+        <div className="h-[70%] sm:h-[90%] md:h-[100%] glass-card w-full rounded-2xl shadow-2xl overflow-hidden">
           <textarea
             name="text"
             id="textarea"
@@ -136,12 +136,12 @@ function App() {
             minLength={3}
             maxLength={65536}
             disabled={loading}
-            className="w-full p-4 h-full disabled:opacity-70 disabled:bg-gray-300 focus:outline-1 focus:outline-black-30 rounded-lg"
+            className="w-full p-4 h-full bg-transparent text-white placeholder-white/50 disabled:opacity-50 focus:outline-none rounded-2xl"
             placeholder="Write whatever you want..."
             dir="auto"
           ></textarea>
         </div>
-        <div className="h-[30%] sm:h-[15%] bg-white w-full rounded-lg md:hidden shadow-md">
+        <div className="h-[30%] sm:h-[15%] glass-card w-full rounded-2xl shadow-2xl">
           <form
             id="mobile-form"
             className="flex gap-3 flex-col items-center justify-center sm:flex-row h-full"
@@ -150,9 +150,9 @@ function App() {
             <div className="flex items-center">
               <label
                 htmlFor="custom-url"
-                className="text-xl block font-black mt-1"
+                className="text-xl block font-black mt-1 text-white/90"
               >
-                <span className="text-blue-500 text-2xl">P</span>astes.ir/
+                <span className="text-pink-300 text-2xl">P</span>astes.ir/
               </label>
               <input
                 type="text"
@@ -162,7 +162,7 @@ function App() {
                 value={slang ?? ""}
                 disabled={loading}
                 onChange={(e) => setSlang(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-44 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="glass-input disabled:opacity-50 rounded-xl w-44 py-1.5 px-2 text-white placeholder-white/60 leading-tight focus:outline-none transition-all duration-300"
                 placeholder="panda(Opt.)"
               />
             </div>
@@ -175,7 +175,7 @@ function App() {
                 value={password ?? ""}
                 disabled={loading}
                 onChange={(e) => setPassword(e.target.value)}
-                className="invalid:border-red-500 invalid:border disabled:opacity-70 bg-gray-200 shadow-sm appearance-none border-2 border-gray-200 rounded-xl w-52 py-1.5 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                className="glass-input disabled:opacity-50 rounded-xl w-52 py-1.5 px-2 text-white placeholder-white/60 leading-tight focus:outline-none transition-all duration-300"
                 placeholder="Password(Opt.)"
               />
             </div>

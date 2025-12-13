@@ -80,15 +80,15 @@ const SlangPage = () => {
         />
       </Helmet>
       <div className="flex flex-col gap-3 h-[90%] lg:h-[92%]">
-        <header className="w-full mx-auto rounded-lg h-[10%] flex items-center justify-between md:bg-white px-2 md:shadow-md">
+        <header className="w-full mx-auto rounded-2xl h-[10%] flex items-center justify-between glass-card px-2 shadow-2xl">
           <div className="flex items-center">
             <Logo />
-            <span className="pt-3 text-xl text-black font-bold">/</span>
-            <span className="pt-3 font-bold text-lg text-gray-700 truncate max-w-[120px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[550px] overflow-hidden">
+            <span className="pt-3 text-xl text-white/90 font-bold">/</span>
+            <span className="pt-3 font-bold text-lg text-white/80 truncate max-w-[120px] sm:max-w-[300px] md:max-w-[450px] lg:max-w-[550px] overflow-hidden">
               {slang}
             </span>
             <button
-              className="flex items-center justify-center rounded-full text-gray-700 text-xl cursor-pointer hover:bg-gray-400/50 h-7 w-7"
+              className="flex items-center justify-center rounded-full text-white/80 hover:text-white text-xl cursor-pointer hover:bg-white/20 h-7 w-7 transition-all duration-300"
               onClick={copyLinkToClipboard}
               title="Copy link to clipboard"
             >
@@ -105,7 +105,7 @@ const SlangPage = () => {
               >
                 <button
                   type="button"
-                  className="border border-gray-700/70 w-24 hover:border-gray-700 text-black/80 hover:text-black text-center flex items-center justify-center rounded-lg py-1 tracking-widest hover:tracking-[5px] cursor-pointer shadow-md hover:shadow-lg duration-200 ease-linear hover:bg-gray-100"
+                  className="glass-button text-white/90 hover:text-white text-center flex items-center justify-center rounded-xl px-4 py-1 tracking-widest hover:tracking-[5px] cursor-pointer shadow-lg duration-300"
                 >
                   <span>RAW</span>
                 </button>
@@ -118,7 +118,7 @@ const SlangPage = () => {
             <Spinner />
           ) : (
             <>
-              <div className="h-[100%] bg-white w-full rounded-lg shadow-md relative">
+              <div className="h-[100%] glass-card w-full rounded-2xl shadow-2xl relative overflow-hidden">
                 {isProtected && (
                   <PasswordBox
                     getData={getData}
@@ -139,7 +139,7 @@ const SlangPage = () => {
                   maxLength={65536}
                   dir="auto"
                   disabled
-                  className="w-full p-4 h-full disabled:bg-gray-50 focus:outline-1 focus:outline-black-30 rounded-lg"
+                  className="w-full p-4 h-full bg-transparent text-white placeholder-white/50 focus:outline-none rounded-2xl"
                 ></textarea>
                 {!isProtected && (
                   <div
@@ -148,7 +148,7 @@ const SlangPage = () => {
                   >
                     <button
                       type="button"
-                      className="text-white cursor-pointer shadow-md active:scale-95 duration-200 bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:outline-none dark:focus:ring-green-800 font-medium rounded-full text-sm w-10 h-10 text-center"
+                      className="glass-button text-white cursor-pointer shadow-lg hover:shadow-xl active:scale-95 duration-300 rounded-full w-12 h-12 text-center flex items-center justify-center"
                     >
                       <i className="fa-regular fa-copy text-2xl"></i>
                     </button>

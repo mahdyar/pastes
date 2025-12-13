@@ -2,8 +2,8 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-white h-[10%] 2xl:h-[8%] rounded-lg shadow-md px-4 sm:flex sm:justify-between">
-      <div className="sm:flex gap-3 items-center h-full hidden font-medium">
+    <footer className="glass-card h-[10%] 2xl:h-[8%] rounded-2xl shadow-2xl px-4 sm:flex sm:justify-between">
+      <div className="sm:flex gap-3 items-center h-full hidden font-medium text-white/90">
         <span>
           <i className="fa-regular fa-copyright text-lg"></i>
         </span>
@@ -16,9 +16,9 @@ const Footer = () => {
             <img
               src="/github.png"
               alt="Github"
-              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in opacity-80"
+              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in opacity-90 group-hover:opacity-100"
             />
-            <span className="text-xs bg-black text-white px-1 py-0.5 rounded-sm md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100 group-hover:">
+            <span className="text-xs bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-lg md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100">
               Github
             </span>
           </button>
@@ -28,9 +28,9 @@ const Footer = () => {
             <img
               src="/mail.png"
               alt="mail"
-              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in"
+              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in opacity-90 group-hover:opacity-100"
             />
-            <span className="text-xs bg-black text-white px-1 py-0.5 rounded-sm md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100 group-hover:">
+            <span className="text-xs bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-lg md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100">
               Report
             </span>
           </button>
@@ -40,9 +40,9 @@ const Footer = () => {
             <img
               src="/paper.png"
               alt="telegram"
-              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in"
+              className="w-9 md:group-hover:-translate-y-2 duration-200 ease-in opacity-90 group-hover:opacity-100"
             />
-            <span className="text-xs bg-black text-white px-1 py-0.5 rounded-sm md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100 group-hover:">
+            <span className="text-xs bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-lg md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2 duration-200 md:opacity-0 md:group-hover:opacity-100">
               Telegram
             </span>
           </button>

@@ -19,12 +19,14 @@ export default function Layout() {
           content="Paste and share on Pastes.ir"
         />
       </Helmet>
-      <div className="bg-main-background h-[100dvh] px-4 w-full font-display relative">
-        <div className="-z-0 fixed">
-          <div className="bg-blue-500/30 w-[90vw] max-w-[450px] h-[90vw] max-h-[450px] rounded-full fixed -top-1/4 right-1/2 translate-x-1/2 sm:translate-0 sm:-right-22 sm:max-h-[400px] sm:max-w-[400px]"></div>
-          <div className="bg-blue-500/30 w-[90vw] max-w-[450px] h-[90vw] max-h-[450px] rounded-full fixed -bottom-1/4 right-1/2 translate-x-1/2 sm:translate-0 sm:-left-22 sm:max-h-[400px] sm:max-w-[400px]"></div>
+      <div className="animated-gradient h-[100dvh] px-4 w-full font-display relative overflow-hidden">
+        {/* Floating orbs for glassmorphism effect */}
+        <div className="-z-0 fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="floating-orb bg-gradient-to-r from-purple-400 to-pink-400 w-[400px] h-[400px] absolute -top-20 -right-20"></div>
+          <div className="floating-orb bg-gradient-to-r from-blue-400 to-cyan-400 w-[350px] h-[350px] absolute top-1/2 -left-20" style={{ animationDelay: '5s' }}></div>
+          <div className="floating-orb bg-gradient-to-r from-indigo-400 to-purple-400 w-[300px] h-[300px] absolute -bottom-20 right-1/3" style={{ animationDelay: '10s' }}></div>
         </div>
-        <div className="relative h-[100dvh] flex flex-col py-4 min-[1400px]:max-w-[1300px] min-[1700px]:max-w-[1600px] mx-auto">
+        <div className="relative h-[100dvh] flex flex-col py-4 min-[1400px]:max-w-[1300px] min-[1700px]:max-w-[1600px] mx-auto z-10">
           <Outlet />
           <Footer />
         </div>
